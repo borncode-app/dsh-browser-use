@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Browser use",
+    "description": "Lets the agent drive a real browser through browser-use: the package installs itself, updates on every launch, and answers through first-class tools."
+  }
+}

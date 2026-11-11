@@ -1,0 +1,19 @@
+# Inserts the browser-use Host row. The plugin owns the native browser-use
+# package: it installs it into a managed virtual environment, keeps it current
+# on every launch, and exposes its browser actions as first-class tools.
+- insert:
+    - id: browser-use
+      name: '@local/dsh-browser-use'
+      config:
+        # Path the Web GUI reads and writes the plugin's data at.
+        endpoint: /plugins/browser-use
+        # Check PyPI for a newer release every time the Harness starts.
+        autoUpdate: true
+        # Package the plugin installs and keeps current.
+        package: browser-use
+        # Register the browser_* tools the model calls.
+        registerTools: true
+        # Add the operating guide to the model's system prompt.
+        guideInPrompt: true
+        # Longest one browser command may run, in milliseconds.
+        toolTimeoutMs: 120000

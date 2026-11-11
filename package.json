@@ -1,0 +1,39 @@
+{
+  "name": "@local/dsh-browser-use",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Gives the agent native browser control through browser-use: the package installs itself into a managed environment, updates itself on every launch, and answers through first-class tools.",
+  "author": "BornCode (https://github.com/borncode-app)",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/borncode-app/dsh-browser-use.git" },
+  "homepage": "https://github.com/borncode-app/dsh-browser-use#readme",
+  "bugs": { "url": "https://github.com/borncode-app/dsh-browser-use/issues" },
+  "keywords": ["dsh","deepseek-harness","dsh-plugin","browser-automation","browser-use","computer-use","python"],
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "bridge.py",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md"
+  ],
+  "dependencies": {
+    "@deepseek-ai/schemastery": "~3.19.0"
+  },
+  "dsh": {
+    "bundle": { "patch": "./cordis.patch.yml" },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": ["@deepseek-ai/dsh-client-ui-settings"]
+    }
+  }
+}
