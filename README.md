@@ -1,3 +1,25 @@
+> **This repository has moved into one monorepo.**
+>
+> The BornCode plugins — agent customization, desktop control, auto-continue,
+> auto-shutdown, browser use, session instructions, session sync, and the side
+> chat — now live in
+> **[`borncode-app/dsh-borncode`](https://github.com/borncode-app/dsh-borncode)**,
+> one repository with one Plugins entry.
+>
+> | this repo | new home |
+> |---|---|
+> | `dsh-agent-customizer` | `packages/dsh-agent-customizer` |
+> | `dsh-agent-desktop` | `packages/dsh-agent-desktop` |
+> | `dsh-auto-continue` | `packages/dsh-auto-continue` |
+> | `dsh-auto-shutdown` | `packages/dsh-auto-shutdown` |
+> | `dsh-browser-use` | `packages/dsh-browser-use` |
+> | `dsh-session-instructions` | `packages/dsh-session-instructions` |
+> | `dsh-session-sync` | `packages/dsh-session-sync` |
+> | `dsh-side-chat` | `packages/dsh-side-chat` |
+>
+> The code and its history are unchanged; only the repository is shared. Install
+> `dsh-borncode` instead of the individual bundles. This repository stays open
+> so the old links keep working.
 <div align="center">
   <img src="icon.svg" alt="" width="72" height="72">
   <h1>dsh-browser-use</h1>
@@ -20,20 +42,20 @@ on every launch, and exposes the browser actions as first-class tools.
 
 Two browsers come out of it:
 
-- **the Harness browser tab** — the tab the user watches in the sidebar, so every click is visible;
-- **browser-use's own Chromium** — a full DevTools-protocol page you can read and drive from code, for the heavy work.
+- **the Harness browser tab** â€” the tab the user watches in the sidebar, so every click is visible;
+- **browser-use's own Chromium** â€” a full DevTools-protocol page you can read and drive from code, for the heavy work.
 
 ## Features
 
-- **Managed environment** — its own venv and its own Python from the Harness runtime; nothing leaks into your system.
-- **Auto-update from PyPI** — `autoUpdate: true` keeps `browser-use` current; pin it by turning that off.
-- **First-class tools** — `browser_open`, `browser_tab_read`, `browser_tab_click`, `browser_tab_type`,
+- **Managed environment** â€” its own venv and its own Python from the Harness runtime; nothing leaks into your system.
+- **Auto-update from PyPI** â€” `autoUpdate: true` keeps `browser-use` current; pin it by turning that off.
+- **First-class tools** â€” `browser_open`, `browser_tab_read`, `browser_tab_click`, `browser_tab_type`,
   `browser_tabs`, `browser_screenshot`, `browser_exec`, `browser_login`, plus the sidebar-attach helper.
-- **Read-then-act discipline** — the tools return elements with indexes and refs, so the model re-reads after each
+- **Read-then-act discipline** â€” the tools return elements with indexes and refs, so the model re-reads after each
   action instead of reusing stale positions.
-- **Cloud or local** — drives the local Chrome by default; `browser_login` connects a Browser Use Cloud browser
+- **Cloud or local** â€” drives the local Chrome by default; `browser_login` connects a Browser Use Cloud browser
   when a key is configured.
-- **Bounded calls** — `toolTimeoutMs` (120 s default) stops a page that never settles.
+- **Bounded calls** â€” `toolTimeoutMs` (120 s default) stops a page that never settles.
 
 ## Requirements
 
@@ -50,7 +72,7 @@ Two browsers come out of it:
 git clone https://github.com/borncode-app/dsh-browser-use.git dsh-browser-use
 ```
 
-Then in DSH: **Plugins** → install the bundle from that directory, or:
+Then in DSH: **Plugins** â†’ install the bundle from that directory, or:
 
 ```
 plugin_manager install_bundle target=C:\path\to\dsh-browser-use
@@ -72,9 +94,9 @@ Restart once. The package installs itself into the managed venv on the first bro
 ## How it works
 
 ```
-tool call ──▶ plugin host row ──▶ managed venv (python) ──▶ browser-use ──▶ CDP
-                    │                                          │
-                    └── install / update from PyPI ◀────────────┘
+tool call â”€â”€â–¶ plugin host row â”€â”€â–¶ managed venv (python) â”€â”€â–¶ browser-use â”€â”€â–¶ CDP
+                    â”‚                                          â”‚
+                    â””â”€â”€ install / update from PyPI â—€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 The venv can be thrown away at any time: the next call reinstalls it and nothing of yours is lost.
@@ -91,16 +113,16 @@ The venv can be thrown away at any time: the next call reinstalls it and nothing
 | `locale/{en,th,zh}.json` | UI strings |
 | `icon.svg` | plugin icon |
 
-## ภาษาไทย
+## à¸ à¸²à¸©à¸²à¹„à¸—à¸¢
 
-Plugin นี้ให้ agent **ควบคุมเบราว์เซอร์ได้จริง** ผ่านแพ็กเกจ Python [`browser-use`](https://github.com/browser-use/browser-use):
+Plugin à¸™à¸µà¹‰à¹ƒà¸«à¹‰ agent **à¸„à¸§à¸šà¸„à¸¸à¸¡à¹€à¸šà¸£à¸²à¸§à¹Œà¹€à¸‹à¸­à¸£à¹Œà¹„à¸”à¹‰à¸ˆà¸£à¸´à¸‡** à¸œà¹ˆà¸²à¸™à¹à¸žà¹‡à¸à¹€à¸à¸ˆ Python [`browser-use`](https://github.com/browser-use/browser-use):
 
-- ติดตั้งลง virtualenv ที่ plugin จัดการเอง (`~/.dsh/browser-use/venv`) และอัปเดตจาก PyPI ทุกครั้งที่เปิด DSH
-- เพิ่ม tool `browser_*` ให้โมเดลเรียก (`browser_open`, `browser_tab_read`, `browser_tab_click`, `browser_exec`, …)
-- ขับ **แท็บที่คุณเห็นใน sidebar** ได้ (ทุกคลิกมองเห็น) หรือจะใช้ Chromium ของ browser-use เองก็ได้
-- ต่อ Browser Use Cloud ได้ผ่าน `browser_login` ถ้ามี key
-- ลบ venv ทิ้งได้ตลอด เรียกครั้งถัดไปมันจะติดตั้งใหม่เอง
+- à¸•à¸´à¸”à¸•à¸±à¹‰à¸‡à¸¥à¸‡ virtualenv à¸—à¸µà¹ˆ plugin à¸ˆà¸±à¸”à¸à¸²à¸£à¹€à¸­à¸‡ (`~/.dsh/browser-use/venv`) à¹à¸¥à¸°à¸­à¸±à¸›à¹€à¸”à¸•à¸ˆà¸²à¸ PyPI à¸—à¸¸à¸à¸„à¸£à¸±à¹‰à¸‡à¸—à¸µà¹ˆà¹€à¸›à¸´à¸” DSH
+- à¹€à¸žà¸´à¹ˆà¸¡ tool `browser_*` à¹ƒà¸«à¹‰à¹‚à¸¡à¹€à¸”à¸¥à¹€à¸£à¸µà¸¢à¸ (`browser_open`, `browser_tab_read`, `browser_tab_click`, `browser_exec`, â€¦)
+- à¸‚à¸±à¸š **à¹à¸—à¹‡à¸šà¸—à¸µà¹ˆà¸„à¸¸à¸“à¹€à¸«à¹‡à¸™à¹ƒà¸™ sidebar** à¹„à¸”à¹‰ (à¸—à¸¸à¸à¸„à¸¥à¸´à¸à¸¡à¸­à¸‡à¹€à¸«à¹‡à¸™) à¸«à¸£à¸·à¸­à¸ˆà¸°à¹ƒà¸Šà¹‰ Chromium à¸‚à¸­à¸‡ browser-use à¹€à¸­à¸‡à¸à¹‡à¹„à¸”à¹‰
+- à¸•à¹ˆà¸­ Browser Use Cloud à¹„à¸”à¹‰à¸œà¹ˆà¸²à¸™ `browser_login` à¸–à¹‰à¸²à¸¡à¸µ key
+- à¸¥à¸š venv à¸—à¸´à¹‰à¸‡à¹„à¸”à¹‰à¸•à¸¥à¸­à¸” à¹€à¸£à¸µà¸¢à¸à¸„à¸£à¸±à¹‰à¸‡à¸–à¸±à¸”à¹„à¸›à¸¡à¸±à¸™à¸ˆà¸°à¸•à¸´à¸”à¸•à¸±à¹‰à¸‡à¹ƒà¸«à¸¡à¹ˆà¹€à¸­à¸‡
 
 ## License
 
-[MIT](LICENSE) © 2026 BornCode
+[MIT](LICENSE) Â© 2026 BornCode
